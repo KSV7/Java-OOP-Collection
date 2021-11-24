@@ -7,20 +7,10 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 
 public class Group {
 	private String name;
-
 	private ArrayList<Student> students = new ArrayList<Student>();
-
-	public static Comparator<Student> StuNameComparator = new Comparator<Student>() {
-		public int compare(Student s1, Student s2) {
-			String StudentName1 = s1.getLastName().toUpperCase();
-			String StudentName2 = s2.getLastName().toUpperCase();
-			return StudentName1.compareTo(StudentName2);
-		}
-	};
 
 	public Group(String name, ArrayList<Student> students) {
 		super();
@@ -38,7 +28,18 @@ public class Group {
 	}
 
 	public void add(Student student) {
-		students.add(student);
+		for (int i = 0;; i += 1) {
+			try {
+				if (students.size() > 9) {
+					throw new FullGroupException();
+				}
+				students.add(student);
+				break;
+			} catch (FullGroupException e) {
+				System.err.println(e.getMessage());
+				break;
+			}
+		}
 	}
 
 	public String del(String lastName) {
@@ -61,12 +62,10 @@ public class Group {
 		return null;
 	}
 
-
-
 	public void saveListStudentsToFile(String fileName) {
 		String res = "";
 		StringBuilder stringBuilder = new StringBuilder();
-		Collections.sort(students, Group.StuNameComparator);
+		Collections.sort(students, new StudentLastNameComparator());
 
 		for (Student s : students) {
 			if (s != null) {
@@ -103,7 +102,7 @@ public class Group {
 	public String toString() {
 		StringBuilder stringBuilder = new StringBuilder();
 
-		Collections.sort(students, Group.StuNameComparator);
+		Collections.sort(students, new StudentLastNameComparator());
 
 		stringBuilder.append("\n");
 		stringBuilder.append("Group name: " + name);

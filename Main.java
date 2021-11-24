@@ -16,10 +16,14 @@ public class Main {
 		group.add(new Student("John", "Jackson", "Jonsovich", 31, true, 8));
 		group.add(new Student("Oleg", "Grant", "Olegovich", 30, true, 9));
 		group.add(new Student("Igor", "Davis", "Igorevich", 22, true, 10));
+		
+		group.add(new Student("Igor2", "Davis2", "Igorevich2", 23, true, 13));
+		group.add(new Student("Igor3", "Davis3", "Igorevich3", 23, true, 13));
+//		group.add(new Student("Igor4", "Davis4", "Igorevich4", 23, true, 13));
 
-		System.out.println("Студент, которого удаляем:");
-		System.out.println(group.del("Vasiliev"));
-		System.out.println();
+//		System.out.println("Студент, которого удаляем:");
+//		System.out.println(group.del("Vasiliev"));
+//		System.out.println();
 		
 		System.out.println("Студент, которого искали:");
 		System.out.println(group.searchByLastName("Williams"));
