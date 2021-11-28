@@ -28,18 +28,15 @@ public class Group {
 	}
 
 	public void add(Student student) {
-		for (int i = 0;; i += 1) {
-			try {
-				if (students.size() > 9) {
-					throw new FullGroupException();
-				}
-				students.add(student);
-				break;
-			} catch (FullGroupException e) {
-				System.err.println(e.getMessage());
-				break;
+		try {
+			if (students.size() > 9) {
+				throw new FullGroupException();
 			}
+			students.add(student);
+		} catch (FullGroupException e) {
+			System.err.println(e.getMessage());
 		}
+		
 	}
 
 	public String del(String lastName) {
